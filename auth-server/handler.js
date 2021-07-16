@@ -1,5 +1,5 @@
 const { google } = require("googleapis");
-const { resultingClientExists } = require("workbox-core/_private");
+
 const OAuth2 = google.auth.OAuth2;
 const calendar = google.calendar("v3");
 
@@ -22,7 +22,7 @@ const credentials = {
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
   redirect_uris: ["https://clarapapaya.github.io/Meet_App/"],
-  javascript_origins: ["https://clarapapaya.github.io", "http://localhost:3000", "http://localhost:8080"]
+  javascript_origins: ["https://clarapapaya.github.io"]
 };
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
 const oAuth2Client = new google.auth.OAuth2(
@@ -56,9 +56,7 @@ module.exports.getAuthURL = async () => {
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify({
-      authUrl: authUrl
-    })
+    body: JSON.stringify({ authUrl: authUrl })
   };
 };
 
