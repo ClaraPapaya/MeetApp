@@ -21,7 +21,7 @@ class CitySearch extends Component {
       query: suggestion,
       showSuggestions: false
     });
-    this.props.updateEvents(suggestion);
+    this.props.updateEvents(suggestion, 0);
   }
   render() {
     return (
@@ -30,9 +30,11 @@ class CitySearch extends Component {
           type='text'
           className='city'
           value={this.state.query}
+          placeholder='Search for a city'
           onChange={this.handleInputChanged}
           onFocus={() => { this.setState({ showSuggestions: true }) }}
         />
+        <div className='selectNumber'>'Select number of events</div>
         <ul className='suggestions' style={this.state.showSuggestions ? {} : { display: 'none' }}>
           {this.state.suggestions.map((suggestion) => (
             <li key={suggestion} onClick={() => this.handleItemClicked(suggestion)}>{suggestion}</li>

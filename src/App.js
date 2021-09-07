@@ -1,5 +1,4 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { extractLocations, getEvents } from './api';
 import './App.css';
 import './nprogress.css';
@@ -10,16 +9,23 @@ import NumberOfEvents from './NumberOfEvents';
 class App extends Component {
   state = {
     events: [],
-    locations: []
-  }
+    locations: [],
+    eventValue: 10
+  };
 
-  updateEvents = (location) => {
+  updateEvents = (location, eventValue) => {
+    let locationEvents;
     getEvents().then((events) => {
-      const locationEvents = (location === 'all') ?
-        events :
-        events.filter((event) => event.location === location);
+      if (location === 'all' && eventValue === 0) {
+        locationEvents = events;
+      } else if (location !== 'all' && eventValue === 0) {
+        locationEvents = events.filter((event) => event.location === location);
+      } else if (location === '' && eventValue > 0) {
+        locationEvents = events.slice(0, eventValue);
+      }
       this.setState({
-        events: locationEvents
+        events: locationEvents,
+        eventValue
       });
     });
   }
@@ -28,7 +34,7 @@ class App extends Component {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) });
+        this.setState({ events: events.slice(0, this.state.eventValue), locations: extractLocations(events) });
       }
     });
   }
@@ -40,9 +46,9 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} numberOfEvents={this.state.numberOfEvents} />
         <EventList events={this.state.events} />
-        <NumberOfEvents />
+        <NumberOfEvents eventValue={this.state.eventValue} updateEvents={this.updateEvents} />
       </div>
     );
   }
