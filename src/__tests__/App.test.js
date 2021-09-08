@@ -71,7 +71,6 @@ describe('<App /> integration', () => {
   test('get list on changed number of events by the user', async () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-    const locations = extractLocations(mockData);
     AppWrapper.instance().updateEventValue = jest.fn();
     AppWrapper.instance().forceUpdate();
     NumberOfEventsWrapper.setState({ eventValue: 10 });
