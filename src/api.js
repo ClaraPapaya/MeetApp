@@ -31,13 +31,13 @@ const removeQuery = () => {
   if (window.history.pushState && window.location.pathname) {
     var newurl =
       window.location.protocol +
-      "//" +
+      '//' +
       window.location.host +
       window.location.pathname;
-    window.history.pushState("", "", newurl);
+    window.history.pushState('', '', newurl);
   } else {
-    newurl = window.location.protocol + "//" + window.location.host;
-    window.history.pushState("", "", newurl);
+    newurl = window.location.protocol + '//' + window.location.host;
+    window.history.pushState('', '', newurl);
   }
 };
 
@@ -51,7 +51,7 @@ const getToken = async (code) => {
     })
     .catch((error) => error);
 
-  access_token && localStorage.setItem("access_token", access_token);
+  access_token && localStorage.setItem('access_token', access_token);
 
   return access_token;
 };
@@ -62,6 +62,13 @@ export const getEvents = async () => {
     NProgress.done();
     return mockData;
   }
+
+  if (!navigator.onLine) {
+    const lastEvents = localStorage.getItem('lastEvents');
+    NProgress.done();
+    return lastEvents ? JSON.parse(lastEvents).events : [];;
+  }
+
   const token = await getAccessToken();
 
   if (token) {
@@ -96,4 +103,4 @@ export const getAccessToken = async () => {
     return code && getToken(code);
   }
   return accessToken;
-}
+};
