@@ -4,6 +4,7 @@ import { ErrorAlert } from './Alert';
 class NumberOfEvents extends Component {
   state = {
     eventValue: 10,
+    errorText: ''
   };
 
   handleEventInputChanged = (event) => {
@@ -31,7 +32,6 @@ class NumberOfEvents extends Component {
   render() {
     return (
       <div className='EventNumber'>
-        <ErrorAlert text={this.state.errorText} />
         <label htmlFor='numberOfEvent'></label>
         <input
           type='number'
@@ -41,6 +41,7 @@ class NumberOfEvents extends Component {
           value={this.state.eventValue}
           onChange={this.handleEventInputChanged}
         />
+        <ErrorAlert text={this.state.errorText} />
       </div>
     );
   }
