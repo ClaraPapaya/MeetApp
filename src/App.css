@@ -2,6 +2,8 @@
 .App {
   text-align: center;
   padding: 2% 5%;
+  background-color: #bee0d9;
+  color: #06495b;
 }
 
 .App * {
