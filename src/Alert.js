@@ -27,6 +27,7 @@ class InfoAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = 'blue';
+    this.position = 'relative';
   }
 }
 
@@ -35,7 +36,17 @@ class ErrorAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = 'red';
+    this.position = 'relative';
   }
 }
 
-export { InfoAlert, ErrorAlert };
+//Subclass 3
+class WarningAlert extends Alert {
+  constructor(props) {
+    super(props);
+    this.color = 'orange';
+    this.position = 'relative';
+  }
+}
+
+export { InfoAlert, ErrorAlert, WarningAlert };

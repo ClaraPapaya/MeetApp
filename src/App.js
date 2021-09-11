@@ -5,13 +5,15 @@ import './nprogress.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import { WarningAlert } from './Alert';
 
 class App extends Component {
   state = {
     events: [],
     locations: [],
     eventValue: 10,
-    currentLocation: 'all'
+    currentLocation: 'all',
+    infoText: ''
   };
 
   updateEvents = (location, eventValue) => {
@@ -45,6 +47,15 @@ class App extends Component {
         this.setState({ events: events.slice(0, this.state.eventValue), locations: extractLocations(events) });
       }
     });
+    if (!navigator.onLine) {
+      this.setState({
+        infoText: 'No internet connection detected, previously loaded events are displayed.'
+      });
+    } else {
+      this.setState({
+        infoText: ''
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -54,9 +65,12 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <h2>Meet App</h2>
+        <h1>Meet App</h1>
+        <h4>Choose your city</h4>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} numberOfEvents={this.state.eventValue} />
+        <h4>Select number of events</h4>
         <NumberOfEvents eventValue={this.state.eventValue} updateEventValue={this.updateEventValue} />
+        <WarningAlert text={this.state.infoText} className='WarningAlert' />
         <EventList events={this.state.events} />
       </div>
     );
