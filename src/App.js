@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { extractLocations, getEvents } from './api';
+import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import './App.css';
 import './nprogress.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { WarningAlert } from './Alert';
+import WelcomeScreen from './WelcomeScreen';
 
 class App extends Component {
   state = {
@@ -13,7 +14,8 @@ class App extends Component {
     locations: [],
     eventValue: 10,
     currentLocation: 'all',
-    infoText: ''
+    infoText: '',
+    showWelcomeScreen: undefined
   };
 
   updateEvents = (location, eventValue) => {
@@ -40,21 +42,28 @@ class App extends Component {
     this.updateEvents(this.state.currentLocation, eventValue)
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ events: events.slice(0, this.state.eventValue), locations: extractLocations(events) });
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get('code');
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({ events: events.slice(0, this.state.eventValue), locations: extractLocations(events) });
+        }
+      });
+      if (!navigator.onLine) {
+        this.setState({
+          infoText: 'No internet connection detected, previously loaded events are displayed.'
+        });
+      } else {
+        this.setState({
+          infoText: ''
+        });
       }
-    });
-    if (!navigator.onLine) {
-      this.setState({
-        infoText: 'No internet connection detected, previously loaded events are displayed.'
-      });
-    } else {
-      this.setState({
-        infoText: ''
-      });
     }
   }
 
@@ -63,6 +72,8 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.showWelcomeScreen === undefined)
+      return <div className='App' />
     return (
       <div className='App'>
         <h1>Meet App</h1>
@@ -72,9 +83,10 @@ class App extends Component {
         <NumberOfEvents eventValue={this.state.eventValue} updateEventValue={this.updateEventValue} />
         <WarningAlert text={this.state.infoText} className='WarningAlert' />
         <EventList events={this.state.events} />
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
       </div>
     );
-  }
+  };
 }
 
 export default App;
