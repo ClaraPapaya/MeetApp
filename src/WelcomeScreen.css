@@ -1,9 +1,13 @@
 .WelcomeScreen   {   
   position:   fixed;   
+  left: 0;
   width:   100%;   
   height:   100%;   
   top:   0;   
+  padding-left: 4%;
+  padding-right: 4%;
   background:   #bee0d9;
+
 }   
 
 .login-button   {   
