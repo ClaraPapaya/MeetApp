@@ -1,11 +1,12 @@
 # Meet_App
+[Meet App](https://clarapapaya.github.io/Meet_App)
 
-## Project Objective
+## About The Project
+### Objective
 To build a serverless,   progressive web application (PWA) with React using a test-driven development (TDD) technique. The application uses the Google Calendar API to fetch upcoming events.
+### Key Features
+**FEATURE 1: FILTER EVENTS BY CITY**
 
-## Key Features
-
-### Feature 1: FILTER EVENTS BY CITY
 **User Story:** As a user, I should be able to filter events by city, so that I can see the list of events that take place in that city.
 
 **Scenario 1:** When the user hasn’t searched for a city, show upcoming events from all cities.
@@ -26,7 +27,8 @@ To build a serverless,   progressive web application (PWA) with React using a te
 * When the user selects a city (e.g., “Berlin, Germany”) from the list
 * Then their city should be changed to that city (i.e., “Berlin, Germany”) and the user should receive a list of upcoming events in that city
 
-### Feature 2: SHOW/HIDE AN EVENT'S DETAILS
+**FEATURE 2: SHOW/HIDE AN EVENT'S DETAILS**
+
 **User Story:** As a user, I should be able to click on certain events, so that I can open or close the details of the chosen event.
 
 **Scenario 1:** An event element is collapsed by default.
@@ -47,7 +49,8 @@ To build a serverless,   progressive web application (PWA) with React using a te
 * When the user clicks on a button or outside the element
 * Then the event element closes/collapses hiding the details
 
-### Feature 3: SPECIFY NUMBER OF EVENTS
+**FEATURE 3: SPECIFY NUMBER OF EVENTS**
+
 **User Story:** As a user, I should be able to specify the number of event, so I can choose how many I want to see on my screen at the same time.
 
 **Scenario 1:** When user hasn’t specified a number, 32 is the default number.
@@ -62,7 +65,8 @@ To build a serverless,   progressive web application (PWA) with React using a te
 * When the user inputs their preferred number
 * Then the list of events is adjusted to that number
 
-### Feature 4: USE THE APP WHEN OFFLINE
+**FEATURE 4: USE THE APP WHEN OFFLINE**
+
 **User Story:** As a user, I should be able to use the app when offline, so I can still see my events that I looked at last.
 
 **Scenario 1:** Show cached data when there’s no internet connection.
@@ -77,7 +81,8 @@ To build a serverless,   progressive web application (PWA) with React using a te
 * When the user changes any settings
 * Then an error message should be displayed
 
-### Feature 5: DATA VISUALIZATION
+**FEATURE 5: DATA VISUALIZATION**
+
 **User Story:** As a user, I should be able to see future events in several cities, so I can make a decision about which city to look at.
 
 **Scenario 1:** Show a chart with the number of upcoming events in each city.
@@ -86,7 +91,7 @@ To build a serverless,   progressive web application (PWA) with React using a te
 * When the user clicks on the chart
 * Then a detailed chart with all available cities and their events displays
 
-## Technical Requirements
+### Technical Requirements
 - The app must be a React application.
 - The app must be built using the TDD technique.
 - The app must use the Google Calendar API and OAuth2 authentication flow.
@@ -104,4 +109,33 @@ To build a serverless,   progressive web application (PWA) with React using a te
 - The app must be covered by tests with a coverage rate >= 90%.
 - The app must be monitored using an online monitoring tool.
 
+## Built With
+* [React](https://reactjs.org/)
+* [React Bootstrap](https://react-bootstrap.github.io/)
+* [Redux](https://redux.js.org/)
+* [JavaScript](https://www.javascript.com/)
+* [Node.js](https://nodejs.org/)
+* [Visual Studio Code](https://code.visualstudio.com/)
+### Dependencies
+* react
+* axios
+* react-scripts
+* recharts
+* nprogress
+### Dev Dependencies
+* enzyme
+* jest-cucumber
+* puppeteer
+* gh-pages
 
+## Getting Started
+### Setting Up
+To run this app locally you need to use Node.js
+``` 
+npm install --global
+```
+### Running The App
+Use the command:
+``` 
+npm start
+```
