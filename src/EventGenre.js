@@ -22,7 +22,7 @@ const EventGenre = ({ events }) => {
     <ResponsiveContainer height={400}>
       <PieChart width={400} height={400}>
         <Pie
-          className='pie'
+          className='MIKETALKSTOME'
           data={data}
           cx={200}
           cy={200}
