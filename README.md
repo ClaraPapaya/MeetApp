@@ -1,5 +1,5 @@
-# Meet_App
-[Meet App](https://clarapapaya.github.io/Meet_App)
+# MeetApp
+The MeetApp is hosted [here](https://clarapapaya.github.io/Meet_App).
 
 ## About The Project
 ### Objective
