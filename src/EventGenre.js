@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
-import './EventGenre.css';
 
 const EventGenre = ({ events }) => {
   const [data, setData] = useState([]);
@@ -9,7 +8,7 @@ const EventGenre = ({ events }) => {
 
   const getData = () => {
     let data = genres.map((genre) => {
-      const value = events.filter((event) => event.summary.includes(genre)).length
+      const value = events.filter((event) => event.summary.split(' ').includes(genre)).length
       return { name: genre, value }
     });
     data = data.filter(data => data.value)
@@ -20,7 +19,7 @@ const EventGenre = ({ events }) => {
 
   return (
     <ResponsiveContainer height={400}>
-      <PieChart width={400} height={400} margin='0 auto'>
+      <PieChart width={400} height={400}>
         <Pie
           data={data}
           cx={200}
